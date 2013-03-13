@@ -1,0 +1,14 @@
+* {
+	font-size: 32px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 200;
+}
+
+body{
+	width: 96%;
+	margin:20px auto;
+}
+
+.module{
+	margin-bottom: 100px;
+}

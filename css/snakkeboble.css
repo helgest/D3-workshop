@@ -1,0 +1,10 @@
+#snakkeboble{
+      overflow: hidden;
+}
+#snakkeboble div{
+      background: url("../img/bubble03.svg") no-repeat;
+      float: right;
+      height: 400px;
+      padding: 103px 216px 100px 119px;
+      width: 273px;
+ }

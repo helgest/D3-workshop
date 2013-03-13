@@ -2,3 +2,6 @@
 	stroke: #fff;
 	stroke-width: 2;
 }
+#favorittfarger option {
+	font-weight: 200!important; 
+}
