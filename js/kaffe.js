@@ -6,17 +6,15 @@ var oppdaterKaffe = function (datasett) {
 		.append("div")
 			.attr("class", "fagomraade");
 
-		avd.append("span")
+		avd.append("div")
 			.attr("class", "name")
 			.text(function (d) {return d});
 
 		avd.append("div")
-				.attr("class", "forbruk")
-			.append("span")
-				.attr("class", "kaffebar")
-				.attr("style", function (d) {
-					return "width: " + d3.mean(datasett[d], function (d) { console.log(d.Kaffeforbruk);return d.Kaffeforbruk }) * 32 + "px";
-				});
+			.attr("class", "kaffebar")
+			.attr("style", function (d) {
+				return "width: " + d3.mean(datasett[d], function (d) { console.log(d.Kaffeforbruk);return d.Kaffeforbruk }) * 32 + "px";
+			});
 };
 
 var sorterDataOgOppdaterKaffe = function (data) {

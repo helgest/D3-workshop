@@ -1,5 +1,7 @@
 #favorittfarger svg {
 	stroke: #fff;
+}
+#favorittfarger svg path:hover {
 	stroke-width: 2;
 }
 #favorittfarger option {
