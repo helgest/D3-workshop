@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- Generated with d3-generator.com -->
+<html>
+  <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <title>D3.js - Infographics</title>
+     <style>
+     body {
+      font-size: 32px;
+     }
+     select{
+      font-size: 32px;
+      font-family: serif;
+     }
+		.Strategi rect {
+		  stroke: #ff0000;
+		}
+    #favorittfarger svg{
+     stroke:#fff;
+     stroke-width:2;
+    }
+    #tekstopplysning{
+      background: url("img/bubble03.svg") no-repeat;
+      float: right;
+      
+      height: 400px;
+      padding: 103px 216px 100px 119px;
+      width: 273px;
+    }
+    #kaffekopper{
+      display:block;
+      width: 400px;
+      height: 60px;
+      background: url("img/coffeecup01.svg") repeat-x;
+      background-size: 60px;
+    }
+	</style>
+  </head>
+  <body>
+    <div id="favorittfarger"><div>Dette er favorittfargene til 
+      <select>
+        <option value="grafiskdesign">design</option>
+        <option value="frontend">front-end</option>
+        <option value="strategi">strategi</option>
+        <option value="interaksjonsdesign">ixd</option>
+      </select> 
+      folka våre</div>
+      <svg width="600" height="400"></svg>
+    </div>
+    <div id="kaffekopper"></div>
+    <div id="tekstopplysning">Det var strategifolk som var raskest til å svare på denne undersøkelsen</div>
+
+    <script src="js/d3.v3.min.js"></script>
+    <script>
+
+d3.csv("https://docs.google.com/spreadsheet/pub?key=0AmIZ0GqXTrZYdFJzUWlTajQzOGpzS3lCWjdUU0FMRHc&output=csv", function (error, data){
+
+function randomFromInterval(from,to){
+    return Math.floor(Math.random()*(to-from+1)+from);
+}
+
+var barWidth = 20; // height of one bar
+var maxBarWidth = 1000; // width of the bar with the max value
+var heartPositions = [[13,14],[60,32],[7,61],[56,79],[99,103],[107,46],[19,118],[140,80],[64,143],[268,138],[191,90],[158,130],[158,22],[240,102],[213,150],[114,150],[213,150],[114,191],[108,1],[168,187],[267,148],[62,187],[250,57]];
+
+ 
+// accessor functions 
+var fagomraade = function(d) { return d['Fagområde']; };
+var hoeyde = function(d) { return parseFloat(d['Høyde']); };
+var pynt = function(d) { return (d['Pynt']); };
+var haarfarge = function(d) { return ("#" + d['Hårfarge']); };
+var favorittfarge = function(d) { return ("#" + d['Favorittfarge']); };
+ 
+
+var favorittfarger = d3.select('#favorittfarger svg')
+
+favorittfarger.selectAll('svg')
+  .data(data)
+  .enter()
+  .append('svg')
+  .attr('class', 'hjerteform')
+  .attr('x', function(d, i) { 
+    x=210;
+    if(i<20) x=heartPositions[i][0];
+     return x;})
+  .attr('y', function(d, i2) { 
+    y=43;
+    if(i2<20) y=heartPositions[i2][1];
+     return y;})
+  .append('path')
+  .attr('d', 'm 32.531026,17.799328 c 0,0 -4.637983,-16.0650504 -17.602652,-7.62571 -14.37144748,9.35509 0.767872,21.80895 15.449079,37.84081 C 52.15572,34.397988 59.12315,14.088358 47.72347,8.0985676 37.076354,2.5041876 32.531026,17.799328 32.531026,17.799328 z')
+  .attr('fill', favorittfarge);
+
+});
+    </script>
+  </body>
+</html>

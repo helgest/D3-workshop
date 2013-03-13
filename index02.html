@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- Generated with d3-generator.com -->
+<html>
+  <head>
+     <title>Bar Chart</title>
+     <meta http-equiv="X-UA-Compatible" content="IE=9">
+     <style>
+		.Strategi rect {
+		  stroke: #ff0000;
+		}
+	</style>
+  </head>
+  <body>
+    <svg id="chart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
+
+    
+    <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+	 <g id="svgDrawing" fill="#ffffff" stroke="#e9e9f2" stroke-width="1.49337" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" >
+   <rect y="64.16761" x="51.62932" height="100.44988" width="57.90939" id="pBody"/>
+   <path id="path2989" d="m113.03324,44.698c0,17.36981 -14.97503,31.45081 -33.44767,31.45081c-18.47263,0 -33.44766,-14.08099 -33.44766,-31.45081c0,-17.36981 14.97503,-40.93347 33.44766,-40.93347c18.47263,0 33.44767,23.56366 33.44767,40.93347"/>
+   <rect y="65.01123" x="4.37575" height="24.4768" width="47.4258" id="rect2991"/>
+   <rect y="64.16761" x="109.69347" height="24.39967" width="45.92815" id="rect2993"/>
+   <g transform="matrix(0.6068 0 0 0.6068 -48.1525 641.567)" id="g3922">
+    <path fill="#e9e9f2" stroke="#e9e9f2" d="m198.08592,-987.86005c0,4.83026 -5.29153,8.74603 -11.81897,8.74603c-6.52744,0 -11.81897,-3.91577 -11.81897,-8.74603c0,-4.83032 8.12808,-15.83746 14.65552,-15.83746c6.52744,0 8.98242,11.00714 8.98242,15.83746z" id="path3144"/>
+    <path fill="#181c57" stroke="#e9e9f2" id="path3918" d="m195.69858,-984.69958c0,2.69525 -2.95271,4.88025 -6.59506,4.88025c-3.64233,0 -6.59505,-2.185 -6.59505,-4.88025c0,-2.69537 4.53552,-8.83746 8.17786,-8.83746c3.64235,0 5.01225,6.14209 5.01225,8.83746z"/>
+   </g>
+   <g stroke="#e9e9f2" transform="matrix(0.6068 0 0 0.6068 -52.4034 639.605)" id="g3926">
+    <path fill="#e9e9f2" stroke="#e9e9f2" id="path3916" d="m249.14388,-986.91455c0,4.83026 -5.29153,8.74603 -11.81897,8.74603c-6.52744,0 -11.81897,-3.91577 -11.81897,-8.74603c0,-4.83032 8.12808,-15.83746 14.65552,-15.83746c6.52744,0 8.98242,11.00714 8.98242,15.83746z"/>
+    <path fill="#181c57" stroke="#e9e9f2" d="m244.86548,-982.80859c0,2.69531 -2.9527,4.88031 -6.59505,4.88031c-3.64235,0 -6.59505,-2.185 -6.59505,-4.88031c0,-2.69531 4.53551,-8.8374 8.17786,-8.8374c3.64235,0 5.01224,6.14209 5.01224,8.8374z" id="path3920"/>
+   </g>
+  </g>
+	</svg>
+</defs>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+
+
+function renderChart() {
+
+var data = d3.csv.parse(d3.select('#csv').text());
+var barWidth = 200; // height of one bar
+var maxBarWidth = 1000; // width of the bar with the max value
+ 
+// accessor functions 
+var fagomraade = function(d) { return d['Fagområde']; };
+var hoeyde = function(d) { return parseFloat(d['Høyde']); };
+var pynt = function(d) { return (d['Pynt']); };
+var haarfarge = function(d) { return ("#" + d['Hårfarge']); };
+var favorittfarge = function(d) { return ("#" + d['Favorittfarge']); };
+ 
+// sorting
+var sortedData = data.sort(function(a, b) {
+  return d3.ascending(hoeyde(a), hoeyde(b)); 
+}); 
+
+hmean = d3.mean(data,function(d) { return parseFloat(d['Høyde']); });
+console.log(hmean);
+
+// scales
+var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barWidth]);
+var xScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barWidth]);
+var y = function(d, i) { return yScale(i); };
+var x = function(d, i) { return xScale(i); };
+//var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
+//var x = d3.scale.linear().domain([0, d3.max(sortedData, hoeyde)]).range([0, maxBarWidth]);
+
+// svg container element
+var chart = d3.select('#chart')
+  .attr('width', maxBarWidth)
+  .attr('height', sortedData.length * barWidth);
+
+// bars
+var barsContainer = chart.selectAll("rect").data(sortedData).enter().append("rect")
+  .attr('x', x)
+  .attr('fill', haarfarge)
+  .attr('width', '10')
+  .attr('height', function(d) { return (hoeyde(d)); })
+
+//<use id="face01" xlink:href="#svgDrawing" x="10" y="10" />
+var barsContainer = chart.selectAll("use").data(sortedData).enter().append("use")
+  .attr('xlink:href', '#svgDrawing')
+  .attr('x', x)
+  .attr('height', yScale.rangeBand())
+  //.attr("transform", function(d) { return ("scale(" + hoeyde(d)/180 + ")" ); })
+  .attr('fill', favorittfarge)
+  .attr('class', fagomraade);
+
+var barsContainer2 = chart.selectAll("path").data(sortedData).enter().append('svg')
+  .attr('x', function(d, i) { return i*barWidth+80; })
+  .attr('y', '140')
+  .append("path")
+  .attr('d', 'm 32.531026,17.799328 c 0,0 -4.637983,-16.0650504 -17.602652,-7.62571 -14.37144748,9.35509 0.767872,21.80895 15.449079,37.84081 C 52.15572,34.397988 59.12315,14.088358 47.72347,8.0985676 37.076354,2.5041876 32.531026,17.799328 32.531026,17.799328 z')
+  .attr('fill', favorittfarge)
+  .attr('class', fagomraade);
+}
+    </script>
+    <script id="csv" type="text/csv">Tidsmerke,Alder,Høyde,Kjønn,Antall barn,Fagområde,Hårfarge,Øyenfarge,Pynt,Favorittfarge,Hårlengde,Frisørbudsjett,Klesbudsjett,Sportsinteresse,Treningsiver,Kulturinteresse,Utenlandsreiser,Kaffeforbruk,Fagbøker,Mobiltype,Gadgets,,Gadgets,Gadgets
+08.03.2013 kl. 13.25.49,39,220,Mann,0,Front-end,112233,334455,"Briller, Skjegg, Slips",FF0000,0,0,5,5,3,3,3,3,10,iPhone,,8,,8
+08.03.2013 kl. 13.27.11,25,180,Kvinne,1,Grafisk Design,223344,445566,Sminke,AA00DD,10,9,9,0,1,1,2,0,0,Android,,2,,2
+08.03.2013 kl. 13.58.53,36,190,Mann,2,Front-end,544A3B,577F99,Hatt,AAFFDD,3,0,4,0,2,4,3,3,8,Android,,4,,4
+08.03.2013 kl. 13.58.53,36,150,Kvinne,2,Strategi,500A3B,577009,Hatt,000FFD,3,0,4,0,2,4,3,3,8,Android,,4,,4</script>
+    <script>renderChart();</script>
+  </body>
+</html>

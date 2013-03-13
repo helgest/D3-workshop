@@ -1,0 +1,17 @@
+#kaffe {
+	display: table;
+}
+#kaffe .fagomraade {
+	display: table-row;
+}
+#kaffe .navn,
+#kaffe .forbruk {
+	display: table-cell;
+}
+
+#kaffe .kaffebar {
+	display: inline-block;
+	height: 60px;
+	background: url("../img/coffeecup01.svg") repeat-x;
+	background-size: 60px;
+}
