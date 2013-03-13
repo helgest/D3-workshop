@@ -15,7 +15,7 @@ var oppdaterKaffe = function (datasett) {
 			.append("span")
 				.attr("class", "kaffebar")
 				.attr("style", function (d) {
-					return "width: " + d3.mean(datasett[d], function (d) { return d.Kaffeforbruk }) * 60 + "px";
+					return "width: " + d3.mean(datasett[d], function (d) { console.log(d.Kaffeforbruk);return d.Kaffeforbruk }) * 32 + "px";
 				});
 };
 
