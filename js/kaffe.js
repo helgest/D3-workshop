@@ -13,7 +13,14 @@ var oppdaterKaffe = function (datasett) {
 		avd.append("div")
 			.attr("class", "kaffebar")
 			.attr("style", function (d) {
-				return "width: " + d3.mean(datasett[d], function (d) { console.log(d.Kaffeforbruk);return d.Kaffeforbruk }) * 32 + "px";
+				return "width: " + d3.mean(datasett[d], function (d) { return d.Kaffeforbruk }) * 32 + "px";
+			});
+
+		avd.append("sum")
+			.attr("class", "sum")
+			.text(function (d) {
+				var exactSum = d3.mean(datasett[d], function (d) { return d.Kaffeforbruk });
+				return "(" + Math.round( exactSum * 10 )/10 + ")";
 			});
 };
 
