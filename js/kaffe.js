@@ -1,6 +1,6 @@
 var oppdaterKaffe = function (datasett) {
 	var kaffeoversikt = d3.select("#kaffe");
-	var avdelinger = kaffeoversikt.selectAll(".fagomraade").data(d3.keys(datasett));
+	var avdelinger = kaffeoversikt.selectAll("div.fagomraade").data(d3.keys(datasett));
 
 	var avd = avdelinger.enter()
 		.append("div")
@@ -16,7 +16,7 @@ var oppdaterKaffe = function (datasett) {
 				return "width: " + d3.mean(datasett[d], function (d) { return d.Kaffeforbruk }) * 32 + "px";
 			});
 
-		avd.append("sum")
+		avd.append("div")
 			.attr("class", "sum")
 			.text(function (d) {
 				var exactSum = d3.mean(datasett[d], function (d) { return d.Kaffeforbruk });
