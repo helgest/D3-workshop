@@ -35,7 +35,7 @@ lagPassendeKlær = function(d) {
 
 
 // legger til en div med klassen "veivere"
-container = d3.select("body").append("div").attr("class", "veivere");
+container = d3.select("body").append("div").attr("id", "veivere");
 
 
 oppdaterVeivere = function (data) {

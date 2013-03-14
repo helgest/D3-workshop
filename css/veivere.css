@@ -1,14 +1,18 @@
-.veivere * {
+#veivere {
+	background-color: #bbb;
+}
+#veivere * {
 	box-sizing: border-box;	
 }
 
-.veivere .person {
+#veivere .person {
+	margin: 0 10px 20px 0;
 	display: inline-block;
 	width: 40px;
 	position: relative;
 	background-color: #fff;
 }
-.veivere .antrekk {
+#veivere .antrekk {
 	position: absolute;
 	top: 10%;
 	width: 40px;
