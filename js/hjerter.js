@@ -1,5 +1,6 @@
 
 var fagområder;
+var valgtFagområdeHjerter = '';
 
 var heartPositions = [[13,14],[60,32],[7,61],[56,79],[99,103],[107,46],[19,118],[140,80],[64,143],[268,138],[191,90],[158,130],[158,22],[240,102],[213,150],[114,150],[213,150],[114,191],[108,1],[168,187],[267,148],[62,187],[250,57]];
 
@@ -38,9 +39,9 @@ var visHjerter = function (datasett) {
 };
 
 var velgHjertefolk = function (fag) {
-	var valgtFagområde = fag || this.value;
+	valgtFagområdeHjerter = fag || this.value;
 	visHjerter([]);	
-	visHjerter(fagområder[valgtFagområde]);
+	visHjerter(fagområder[valgtFagområdeHjerter]);
 };
 
 var oppdaterHjertevelger = function () {
@@ -68,7 +69,10 @@ var sorterDataOgOppdater = function (data) {
 
     // og oppdaterer nedtrekkslisten
     oppdaterHjertevelger();
-    velgHjertefolk(d3.keys(fagområder)[0]);
+    if (valgtFagområdeHjerter === '') {
+    	valgtFagområdeHjerter = d3.keys(fagområder)[0];
+    }
+    velgHjertefolk(valgtFagområdeHjerter);
 };
 
 // henter kommaseparerte data fra regnearket, gjør det om til json-data og måker det inn i funksjonen sorterEtterFagområde
