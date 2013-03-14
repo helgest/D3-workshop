@@ -36,9 +36,11 @@ lagPassendeKlær = function(d) {
 
 // legger til en div med klassen "veivere"
 container = d3.select("body").append("div").attr("id", "veivere");
+container.append("div").attr("class", "antall").text("Her står vi oppstilt, hele gjengen");
 
 
 oppdaterVeivere = function (data) {
+
 	// d3 velger alle .person-elementer (som i starten er ingen), og binder dette utvalget til arrayen alle 
 	personer = container.selectAll(".person").data(data);
 
