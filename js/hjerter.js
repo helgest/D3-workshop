@@ -1,6 +1,5 @@
 
 var fagområder;
-var hjertefolk;
 
 var heartPositions = [[13,14],[60,32],[7,61],[56,79],[99,103],[107,46],[19,118],[140,80],[64,143],[268,138],[191,90],[158,130],[158,22],[240,102],[213,150],[114,150],[213,150],[114,191],[108,1],[168,187],[267,148],[62,187],[250,57]];
 
@@ -8,10 +7,10 @@ var heartPositions = [[13,14],[60,32],[7,61],[56,79],[99,103],[107,46],[19,118],
 var favorittfarge = function(d) { return ("#" + d.Favorittfarge); };
 
 
-var visHjerter = function () {
+var visHjerter = function (datasett) {
 
 	var hjerteSvg = d3.select('#hjerter'); // finner svg-elementet
-	var hjerter = hjerteSvg.selectAll('.hjerte').data(hjertefolk); // finner 
+	var hjerter = hjerteSvg.selectAll('.hjerte').data(datasett);  
 
 	hjerter.enter()
 		.append('svg')
@@ -38,21 +37,20 @@ var visHjerter = function () {
 
 };
 
-var velgHjertefolk = function () {
-	var valgtFagområde = this.value;
-	hjertefolk = [];
-	visHjerter();	
-	hjertefolk = fagområder[valgtFagområde];
-	visHjerter();
+var velgHjertefolk = function (fag) {
+	var valgtFagområde = fag || this.value;
+	visHjerter([]);	
+	visHjerter(fagområder[valgtFagområde]);
 };
 
 var oppdaterHjertevelger = function () {
-	hjertevelger = d3.select("#hjertevelger") // finn riktig element
-		.on("change", velgHjertefolk) // lytt til change-event
-		.selectAll("option").data(d3.keys(fagområder)); // velger hvilke elementer som skal oppdateres
+	hjertevelger = d3.select("#hjertevelger")               // finn riktig element
+		.on("change", velgHjertefolk)                       // lytt til change-event
+		.selectAll("option.fag").data(d3.keys(fagområder)); // velger hvilke elementer som skal oppdateres
 
 	hjertevelger.enter()                              // for hvert nye element i datasettet:
 		.append("option")                             // legg til et option-element
+			.attr("class", "fag")
 			.attr("value", function (d) {return d;} ) // sett value lik dataelementet
 			.text(function (d) {return d;});          // sett tekstinnhold også lik dataelementet
 
@@ -70,6 +68,7 @@ var sorterDataOgOppdater = function (data) {
 
     // og oppdaterer nedtrekkslisten
     oppdaterHjertevelger();
+    velgHjertefolk(d3.keys(fagområder)[0]);
 };
 
 // henter kommaseparerte data fra regnearket, gjør det om til json-data og måker det inn i funksjonen sorterEtterFagområde
