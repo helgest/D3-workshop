@@ -60,7 +60,7 @@ var oppdaterHjertevelger = function () {
 };
 
 
-var sorterDataOgOppdater = function (data) {
+var sorterDataOgOppdaterHjertevelger = function (data) {
 
 	// her grupperer vi data etter fagområde
 	fagområder = d3.nest()
@@ -75,5 +75,5 @@ var sorterDataOgOppdater = function (data) {
     velgHjertefolk(valgtFagområdeHjerter);
 };
 
-// henter kommaseparerte data fra regnearket, gjør det om til json-data og måker det inn i funksjonen sorterEtterFagområde
-d3.csv("https://docs.google.com/spreadsheet/pub?key=0AmIZ0GqXTrZYdFJzUWlTajQzOGpzS3lCWjdUU0FMRHc&single=true&gid=0&output=csv", sorterDataOgOppdater);
+// henter kommaseparerte data fra regnearket, gjør det om til json-data og måker det inn i funksjonen sorterDataOgOppdaterHjertevelger
+d3.csv("https://docs.google.com/spreadsheet/pub?key=0AmIZ0GqXTrZYdFJzUWlTajQzOGpzS3lCWjdUU0FMRHc&single=true&gid=0&output=csv", sorterDataOgOppdaterHjertevelger);
