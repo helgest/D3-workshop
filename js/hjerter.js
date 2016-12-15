@@ -76,4 +76,5 @@ var sorterDataOgOppdaterHjertevelger = function (data) {
 };
 
 // henter kommaseparerte data fra regnearket, gjør det om til json-data og måker det inn i funksjonen sorterDataOgOppdaterHjertevelger
-d3.csv("https://docs.google.com/spreadsheet/pub?key=0AmIZ0GqXTrZYdFJzUWlTajQzOGpzS3lCWjdUU0FMRHc&single=true&gid=0&output=csv", sorterDataOgOppdaterHjertevelger);
+//d3.csv("https://docs.google.com/spreadsheet/pub?key=0AmIZ0GqXTrZYdFJzUWlTajQzOGpzS3lCWjdUU0FMRHc&single=true&gid=0&output=csv", sorterDataOgOppdaterHjertevelger);
+d3.csv("./data.csv", sorterDataOgOppdaterHjertevelger);

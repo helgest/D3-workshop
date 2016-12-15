@@ -68,6 +68,7 @@
 	};
 
 	// henter kommaseparerte data fra regnearket, gjør det om til json-data og måker det inn i funksjonen oppdatermikrofonsveis
-	d3.csv("https://docs.google.com/spreadsheet/pub?key=0AmIZ0GqXTrZYdFJzUWlTajQzOGpzS3lCWjdUU0FMRHc&single=true&gid=0&output=csv", oppdatermikrofonsveis);
+	//d3.csv("https://docs.google.com/spreadsheet/pub?key=0AmIZ0GqXTrZYdFJzUWlTajQzOGpzS3lCWjdUU0FMRHc&single=true&gid=0&output=csv", oppdatermikrofonsveis);
+	d3.csv("./data.csv", oppdatermikrofonsveis);
 
 })();
